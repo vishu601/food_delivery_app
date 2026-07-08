@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Zwigato</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-900">
+
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="{% url 'home' %}" class="text-2xl font-black text-orange-500 tracking-wide">Zwigato</a>
+                </div>
+                <div class="flex items-center space-x-6 font-semibold text-gray-600">
+                    <a href="{% url 'home' %}" class="hover:text-orange-500 transition">Home</a>
+                    <a href="{% url 'logout' %}" class="text-red-500 hover:underline transition">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-4 py-12">
+        
+        <div class="bg-white rounded-[2.5rem] shadow-xl p-8 md:p-10 border border-gray-100 mb-8">
+            <div class="flex flex-col sm:flex-row items-center gap-6 border-b border-gray-100 pb-8 mb-8">
+                <div class="w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center text-4xl shadow-inner">
+                    👤
+                </div>
+                <div class="text-center sm:text-left space-y-1">
+                    <span class="text-xs font-black uppercase tracking-[0.15em] text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">Verified Customer</span>
+                    <h2 class="text-2xl font-black text-gray-900 mt-2">User: {{ request.user.username }}</h2>
+                    <p class="text-gray-500 font-medium">📱 Mobile: <span class="text-gray-800 font-bold">+91 {{ profile.phone_number }}</span></p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                    <span class="text-gray-400 block font-semibold mb-1">Account Created</span>
+                    <span class="font-bold text-gray-700">{{ request.user.date_joined|date:"d M Y" }}</span>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                    <span class="text-gray-400 block font-semibold mb-1">Primary Location</span>
+                    <span class="font-bold text-gray-700">Kota, Rajasthan</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-[2.5rem] shadow-sm p-8 border border-gray-100">
+            <h3 class="text-xl font-extrabold text-gray-800 mb-4 flex items-center gap-2">
+                📦 My Recent Orders
+            </h3>
+            <div class="text-center py-8 bg-gray-50 rounded-2xl border border-dashed border-gray-200">
+                <p class="text-gray-400 font-medium">You haven't placed any orders yet.</p>
+                <a href="{% url 'home' %}" class="text-orange-500 font-bold text-sm hover:underline mt-2 inline-block">Order delicious food now →</a>
+            </div>
+        </div>
+
+    </main>
+
+</body>
+</html>
