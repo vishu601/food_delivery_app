@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 HTML
 
 {% extends 'base.html' %}
@@ -75,11 +76,85 @@ HTML
                 </a>
                 {% empty %}
                     <p class="text-rose-400 text-sm col-span-full text-center py-6 bg-pink-50/20 rounded-2xl border border-pink-100/40">No categories found. Add some via admin panel.</p>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zwigato | Online Food Delivery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-900">
+
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <h1 class="text-2xl font-black text-orange-500 tracking-wide cursor-pointer">Zwigato</h1>
+                </div>
+                <div class="hidden md:flex items-center space-x-8 font-semibold text-gray-600">
+                    <a href="{% url 'home' %}" class="text-orange-500">Home</a>
+                    <a href="#" class="hover:text-orange-500 transition">Menu</a>
+                    
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'profile' %}" class="text-emerald-600 font-bold hover:text-orange-500 transition">
+                        👋 My Profile ({{ user.username }})
+                    </a>
+                    <a href="{% url 'logout' %}" class="text-red-500 hover:underline transition">Logout</a>
+                    {% else %}
+                        <a href="{% url 'login' %}" class="hover:text-orange-500 transition">Login</a>
+                        <a href="{% url 'signup' %}" class="bg-orange-100 text-orange-600 px-4 py-2 rounded-xl hover:bg-orange-500 hover:text-white transition">Sign Up</a>
+                    {% endif %}
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="{% url 'cart_detail' %}" class="relative p-2 text-gray-700 hover:text-orange-500 font-bold flex items-center gap-1">
+                        <span class="absolute -top-1 -right-1 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-orange-500 rounded-full">
+                            {{ cart_count }}
+                        </span>
+                        🛒 <span class="hidden sm:inline">Cart</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-orange-50 py-16 px-4 text-center border-b border-orange-100">
+        <h2 class="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-3 tracking-tight">
+            Delicious Food, Delivered <span class="text-orange-500">Super Fast</span>
+        </h2>
+        <p class="text-lg text-gray-600 mb-8 max-w-md mx-auto">The best restaurants and dishes in your city, just one click away.</p>
+        <form action="{% url 'home' %}" method="GET" class="max-w-md mx-auto flex items-center bg-white rounded-full shadow-md p-1 border border-gray-200">
+            <input type="text" name="search" value="{{ search_query|default:'' }}" placeholder="Search for burgers, pizza, rolls..." class="w-full px-4 py-2 rounded-full focus:outline-none text-gray-700">
+            <button type="submit" class="bg-orange-500 text-white px-6 py-2 rounded-full font-semibold hover:bg-orange-600 transition">
+                Search
+            </button>
+        </form>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
+        <div class="mb-14">
+            <h3 class="text-2xl font-extrabold text-gray-800 mb-6">What's on your mind?</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6">
+                {% for category in categories %}
+                <a href="?category={{ category.id }}" class="block bg-white p-4 rounded-2xl shadow-sm hover:shadow-md text-center cursor-pointer border border-gray-100 transition transform hover:-translate-y-1 {% if selected_category == category.id|slugify %}ring-2 ring-orange-500 bg-orange-50/30{% endif %}">
+                    {% if category.image %}
+                        <img src="{{ category.image.url }}" alt="{{ category.name }}" class="w-20 h-20 mx-auto mb-3 object-cover rounded-full shadow-inner">
+                    {% else %}
+                        <div class="w-20 h-20 mx-auto mb-3 bg-gray-200 rounded-full flex items-center justify-center text-gray-400">🍲</div>
+                    {% endif %}
+                    <span class="font-bold text-gray-700 text-sm">{{ category.name }}</span>
+                </a>
+                {% empty %}
+                    <p class="text-gray-400 text-sm">No categories added yet. Go to /admin to add.</p>
+>>>>>>> ffc0b11d15974bab4b2e229bd7ed0e3e7bd68cee
                 {% endfor %}
             </div>
         </div>
 
         <div>
+<<<<<<< HEAD
             <div class="flex flex-col sm:flex-row justify-between sm:items-center mb-8 gap-4">
                 <div>
                     <h3 class="text-2xl font-black text-gray-900 tracking-tight">Top Rated Dishes</h3>
@@ -96,10 +171,20 @@ HTML
                     </a>
                     {% endif %}
                 </div>
+=======
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-extrabold text-gray-800">Top Rated Dishes</h3>
+                {% if selected_category or search_query %}
+                <a href="{% url 'home' %}" class="bg-gray-200 text-gray-700 font-bold px-4 py-2 rounded-xl text-sm hover:bg-orange-500 hover:text-white transition duration-200 shadow-sm">
+                    Clear Filter ↺
+                </a>
+            {% endif %}
+>>>>>>> ffc0b11d15974bab4b2e229bd7ed0e3e7bd68cee
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {% for item in food_items %}
+<<<<<<< HEAD
                 <div class="bg-white rounded-3xl shadow-sm overflow-hidden hover:shadow-2xl hover:shadow-pink-200/40 border border-pink-50/60 transition duration-300 flex flex-col justify-between min-h-[440px] group">
                     
                     <div class="relative overflow-hidden aspect-[4/3] bg-pink-50/10">
@@ -122,10 +207,25 @@ HTML
                         {% if not item.is_available %}
                         <div class="absolute inset-0 bg-gray-950/60 backdrop-blur-sm flex items-center justify-center">
                             <span class="bg-red-500 text-white text-xs uppercase tracking-widest px-4 py-1.5 rounded-full font-black shadow-lg">Sold Out</span>
+=======
+                <div class="bg-white rounded-3xl shadow-sm overflow-hidden hover:shadow-xl border border-gray-100 transition duration-300 flex flex-col justify-between min-h-[400px]">
+                    
+                    <div class="relative overflow-hidden">
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" alt="{{ item.name }}" class="w-full h-48 object-cover">
+                        {% else %}
+                            <div class="w-full h-48 bg-gray-100 flex items-center justify-center text-gray-400">No Image</div>
+                        {% endif %}
+                        
+                        {% if not item.is_available %}
+                        <div class="absolute inset-0 bg-gray-900/60 flex items-center justify-center">
+                            <span class="bg-red-500 text-white text-xs uppercase tracking-wider px-3 py-1 rounded-full font-bold">Not Available</span>
+>>>>>>> ffc0b11d15974bab4b2e229bd7ed0e3e7bd68cee
                         </div>
                         {% endif %}
                     </div>
                     
+<<<<<<< HEAD
                     <div class="p-6 flex-grow flex flex-col justify-between">
                         <div>
                             <div class="flex justify-between items-start mb-2 gap-2">
@@ -145,18 +245,39 @@ HTML
                                     Unavailable
                                 </button>
                             {% endif %}
+=======
+                    <div class="p-5 flex-grow flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2 gap-2">
+                                <h4 class="text-lg font-bold text-gray-900 leading-tight">{{ item.name }}</h4>
+                                <span class="text-emerald-600 font-extrabold text-lg flex-shrink-0">₹{{ item.price }}</span>
+                            </div>
+                            <p class="text-sm text-gray-500 mb-4 line-clamp-2">{{ item.description }}</p>
+                        </div>
+                        
+                        <div class="pt-2">
+                            <a href="{% url 'add_to_cart' item.id %}" class="block w-full text-center bg-orange-500 text-white font-bold py-3 px-4 rounded-2xl hover:bg-orange-600 transition duration-200 shadow-md shadow-orange-100 active:scale-95">
+                                Add to Cart
+                            </a>
+>>>>>>> ffc0b11d15974bab4b2e229bd7ed0e3e7bd68cee
                         </div>
                     </div>
 
                 </div>
                 {% empty %}
+<<<<<<< HEAD
                     <div class="col-span-full text-center py-20 bg-white rounded-3xl border border-dashed border-pink-200">
                         <div class="text-4xl mb-3">🧁</div>
                         <p class="text-rose-400 font-semibold text-lg">No gorgeous dishes found matching your selection.</p>
+=======
+                    <div class="col-span-full text-center py-10">
+                        <p class="text-gray-400 text-lg">No dishes found in this category.</p>
+>>>>>>> ffc0b11d15974bab4b2e229bd7ed0e3e7bd68cee
                     </div>
                 {% endfor %}
             </div>
         </div>
+<<<<<<< HEAD
     </main>
 
     <div class="bg-gray-950 text-white py-20 px-4">
@@ -183,3 +304,14 @@ HTML
     </div>
 
 {% endblock %}
+=======
+
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400 py-8 mt-20 border-t border-gray-800 text-center text-sm">
+        <p>&copy; 2026 Zwigato Technologies. Made with ❤️ using Django & Tailwind.</p>
+    </footer>
+
+</body>
+</html>
+>>>>>>> ffc0b11d15974bab4b2e229bd7ed0e3e7bd68cee

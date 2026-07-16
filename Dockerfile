@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 1. Official Python image use karenge
 FROM python:3.10-slim
 
@@ -20,3 +21,18 @@ COPY . /app/
 
 # 7. Django server start karne ki command
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+=======
+FROM python:3.10-slim
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /app
+
+COPY requirements.txt /app/
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . /app/
+
+CMD python manage.py migrate && python manage.py runserver 0.0.0.0:8000
+>>>>>>> ffc0b11d15974bab4b2e229bd7ed0e3e7bd68cee

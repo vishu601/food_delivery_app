@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 django>=4.0
 gunicorn>=21.0.0
 asgiref>=3.7.0
 sqlparse>=0.4.0
 psycopg2-binary>=2.9.0
 Pillow>=10.0.0
+=======
+Django>=4.0
+Pillow
+>>>>>>> ffc0b11d15974bab4b2e229bd7ed0e3e7bd68cee
