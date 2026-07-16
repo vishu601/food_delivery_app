@@ -1,0 +1,21 @@
+name: Django CI-CD Pipeline
+
+# 1. Pipeline kab chalegi? Jab main branch par code PUSH hoga.
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step A: GitHub repository se code ko pipeline environment mein lana
+      - name: Checkout Repository Code
+        uses: actions/checkout@v3
+
+      # Step B: Render Server ko trigger karna ki naya code deploy kare
+      - name: Trigger Render Deployment
+        run: |
+          curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"

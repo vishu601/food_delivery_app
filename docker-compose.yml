@@ -1,0 +1,50 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: food_delivery_db
+    environment:
+      - POSTGRES_DB=food_delivery_db  # Django ke database name se match kar diya!
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=Admin@123
+    ports:
+      - "5435:5432"
+    volumes:
+      - postgres_food_data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    container_name: food_delivery_app
+    ports:
+      - "8085:8000"
+    volumes:
+      - .:/app
+      - /app/__pycache__
+    environment:
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - db
+
+volumes:
+  postgres_food_data:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
